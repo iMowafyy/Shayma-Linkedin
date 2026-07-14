@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خطة تطوير حساب LinkedIn — شيماء | مهندسة تصميم فني وواجهات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b232c;
+    --ink-soft:#4c5866;
+    --paper:#f6f4ef;
+    --card:#ffffff;
+    --blueprint:#12202e;
+    --blueprint-line:#2c4d6b;
+    --copper:#c17a4c;
+    --copper-deep:#a5602f;
+    --aluminum:#7f95a6;
+    --good:#3f7a5c;
+    --warn:#b5482f;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Tajawal',sans-serif;
+    line-height:1.9;
+    font-size:16px;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ===== HERO — blueprint drafting sheet ===== */
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(18,32,46,.94), rgba(18,32,46,.98)),
+      repeating-linear-gradient(0deg, transparent 0 39px, rgba(255,255,255,.045) 39px 40px),
+      repeating-linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,.045) 39px 40px);
+    color:#eef2f5;
+    padding:52px 22px 64px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--copper);
+  }
+  .hero .tag{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    color:var(--copper);
+    border:1px solid var(--copper);
+    padding:4px 10px;
+    border-radius:20px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:26px;
+    font-weight:900;
+    margin:0 0 10px;
+    line-height:1.5;
+  }
+  .hero p.lead{
+    color:#c8d3db;
+    max-width:640px;
+    margin:0 0 26px;
+    font-size:15px;
+  }
+  .dim-line{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--aluminum);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    margin-top:20px;
+  }
+  .dim-line::before, .dim-line::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--blueprint-line);
+  }
+
+  /* nav pills */
+  .nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:26px;
+  }
+  .nav a{
+    text-decoration:none;
+    color:#eef2f5;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18);
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:12.5px;
+    transition:.2s;
+  }
+  .nav a:hover{background:var(--copper);border-color:var(--copper);}
+
+  main{max-width:760px;margin:0 auto;padding:0 18px 60px;}
+
+  /* ===== executive summary ===== */
+  .exec{
+    background:var(--ink);
+    color:#f2ede4;
+    border-radius:var(--radius);
+    padding:26px 22px;
+    margin-top:-34px;
+    box-shadow:0 14px 30px rgba(0,0,0,.18);
+  }
+  .exec h2{
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--copper);
+    font-family:'JetBrains Mono',monospace;
+    margin:0 0 16px;
+  }
+  .exec ol{margin:0;padding-inline-start:0;list-style:none;counter-reset:x;}
+  .exec li{
+    counter-increment:x;
+    display:flex;
+    gap:14px;
+    padding:12px 0;
+    border-top:1px solid rgba(255,255,255,.1);
+  }
+  .exec li:first-child{border-top:none;}
+  .exec li::before{
+    content:"0"counter(x);
+    font-family:'JetBrains Mono',monospace;
+    color:var(--copper);
+    font-weight:700;
+    font-size:20px;
+    min-width:34px;
+  }
+  .exec b{color:#fff;}
+
+  /* section headers */
+  section.block{margin-top:56px;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:18px;
+    border-bottom:2px solid var(--blueprint);
+    padding-bottom:10px;
+  }
+  .section-head .num{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--copper);
+    font-weight:700;
+    font-size:13px;
+  }
+  .section-head h2{
+    font-size:20px;
+    margin:0;
+    font-weight:900;
+  }
+
+  /* status / analysis / recommendation cards */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:20px;
+    margin-bottom:14px;
+    border:1px solid #e7e2d7;
+  }
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:14px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+  }
+  .chip{
+    padding:4px 10px;
+    border-radius:20px;
+    font-weight:700;
+  }
+  .chip.current{background:#f1e3da;color:var(--copper-deep);}
+  .chip.issue{background:#fbe4dd;color:var(--warn);}
+  .chip.fix{background:#e2ede6;color:var(--good);}
+  .card h3{
+    font-size:16px;
+    margin:0 0 8px;
+  }
+  .card p{margin:0 0 10px;color:var(--ink-soft);font-size:14.5px;}
+  .before-after{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:12px;
+  }
+  .box{
+    border-radius:10px;
+    padding:14px;
+    font-size:14px;
+  }
+  .box.before{
+    background:#fbf1ec;
+    border-inline-start:4px solid var(--warn);
+  }
+  .box.after{
+    background:#eef4f0;
+    border-inline-start:4px solid var(--good);
+  }
+  .box .lab{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:6px;
+    opacity:.7;
+  }
+
+  /* content calendar table */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--card);
+    border-radius:var(--radius);
+    overflow:hidden;
+    font-size:13.5px;
+  }
+  th{
+    background:var(--blueprint);
+    color:#eef2f5;
+    text-align:right;
+    padding:11px 10px;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:500;
+    font-size:11.5px;
+  }
+  td{
+    padding:11px 10px;
+    border-top:1px solid #eee6d9;
+    vertical-align:top;
+  }
+  tr:nth-child(even) td{background:#fbf9f4;}
+  .week-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    color:var(--copper-deep);
+    white-space:nowrap;
+  }
+
+  /* numbered steps */
+  .steps{counter-reset:step;list-style:none;padding:0;margin:0;}
+  .steps li{
+    counter-increment:step;
+    display:flex;
+    gap:16px;
+    padding:16px 0;
+    border-top:1px dashed #d9d0bf;
+  }
+  .steps li:first-child{border-top:none;}
+  .step-num{
+    min-width:38px;height:38px;
+    border-radius:50%;
+    background:var(--copper);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .steps h4{margin:0 0 4px;font-size:15px;}
+  .steps p{margin:0;color:var(--ink-soft);font-size:14px;}
+
+  .callout{
+    background:linear-gradient(135deg,#12202e,#1c3347);
+    color:#eef2f5;
+    border-radius:var(--radius);
+    padding:22px;
+    margin-top:20px;
+  }
+  .callout b{color:var(--copper);}
+
+  footer{
+    text-align:center;
+    padding:30px 18px 50px;
+    color:var(--ink-soft);
+    font-size:12.5px;
+  }
+  .backtop{
+    display:inline-block;
+    margin-top:14px;
+    padding:10px 22px;
+    background:var(--ink);
+    color:#fff;
+    text-decoration:none;
+    border-radius:30px;
+    font-size:13px;
+  }
+  @media(min-width:640px){
+    .before-after{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="tag">تقرير تدقيق فني · LinkedIn Profile Audit</span>
+  <h1>خطة تطوير حساب LinkedIn<br>لمهندسة التصميم الفني وواجهات المباني</h1>
+  <p class="lead">
+    تحليل دقيق لملف شيماء الشخصي على LinkedIn (Technical Engineer / Facade Designer)
+    استناداً إلى المحتوى الفعلي المعروض في لقطات الشاشة المرفقة، مع خطة تنفيذية
+    لتحويل الحساب من "سجل وظيفي" إلى أداة جذب عملاء وفرص عمل في تخصص الواجهات
+    والتصميم الفني.
+  </p>
+  <div class="nav">
+    <a href="#exec">الملخص التنفيذي</a>
+    <a href="#headline">العنوان التعريفي</a>
+    <a href="#about">نبذة عني</a>
+    <a href="#experience">الخبرات</a>
+    <a href="#skills">المهارات</a>
+    <a href="#certs">الشهادات</a>
+    <a href="#content">استراتيجية المحتوى</a>
+    <a href="#steps">خطوات التنفيذ</a>
+  </div>
+  <div class="dim-line">١٠ لقطات شاشة تم تحليلها</div>
+</div>
+
+<main>
+
+  <!-- EXEC SUMMARY -->
+  <div class="exec" id="exec">
+    <h2>الملخص التنفيذي — 3 إجراءات فورية</h2>
+    <ol>
+      <li><span><b>صحّح تواريخ الخبرات المتضاربة فوراً:</b> يظهر أنكِ تعملين حالياً بدوام كامل في "Trü Architectural" (Technical Engineer) للفترة نوفمبر 2024 – مايو 2026، بينما يظهر أيضاً منصب "Senior Technical Engineer" في OMSI Group منتهياً في أبريل 2025 ومنصب "Technical Office Engineer" منتهياً في يناير 2025. هذا التداخل الزمني (عملان بدوام كامل في نفس الفترة، وتواريخ تمتد إلى المستقبل) أول ما يلاحظه مسؤول التوظيف ويقلل الثقة في دقة الملف بأكمله.</span></li>
+      <li><span><b>أعد ترتيب المهارات الأساسية الخمس (Top Skills):</b> الظاهر حالياً هو Architecture، Engineering، AutoCAD، Team Motivation، Construction — وهذه لا تعكس تخصصك الفعلي في تصميم الواجهات (Facade). استبدليها بمهارات تقنية دقيقة يبحث عنها أصحاب العمل بالاسم.</span></li>
+      <li><span><b>ابدئي النشر أسبوعياً بمحتوى تقني مصوّر:</b> الحساب حالياً بلا أي نشاط منشورات ظاهر، ما يعني صفراً في خوارزمية الظهور بالبحث. خطة المحتوى بالأسفل تحل هذه المشكلة خلال 30 يوماً.</span></li>
+    </ol>
+  </div>
+
+  <!-- HEADLINE -->
+  <section class="block" id="headline">
+    <div class="section-head"><span class="num">01</span><h2>العنوان التعريفي (Headline)</h2></div>
+    <div class="card">
+      <div class="flow">
+        <span class="chip current">الحالة الحالية</span>
+        <span class="chip issue">مشكلة</span>
+        <span class="chip fix">التوصية</span>
+      </div>
+      <p>
+        لا يظهر عنوان تعريفي مخصص أسفل الاسم — يعرض LinkedIn تلقائياً المسمى الوظيفي
+        الأخير فقط ("Technical Engineer at Trü Architectural"). هذا يعني فقدان أهم
+        150 حرفاً في الملف من ناحية الظهور في نتائج بحث أصحاب العمل ومكاتب التوظيف،
+        لأن العنوان هو أول ما يظهر في نتائج البحث وتحت كل تعليق تكتبينه.
+      </p>
+      <p>
+        المشكلة الجوهرية: عنوان مثل "Technical Engineer at X" يخبر فقط بمكان العمل،
+        دون توضيح التخصص الدقيق (واجهات/كِرتن وول/ألمنيوم) أو القيمة المقدَّمة، وهو
+        ما يمنع ظهور الحساب عند بحث عملاء أو شركات عن كلمات مثل "Facade Engineer"
+        أو "Curtain Wall Designer".
+      </p>
+      <div class="before-after">
+        <div class="box before">
+          <span class="lab">قبل — تلقائي</span>
+          Technical Engineer at Trü Architectural
+        </div>
+        <div class="box after">
+          <span class="lab">بعد — مقترح</span>
+          مهندسة تصميم فني وواجهات (Facade) | كِرتن وول وألمنيوم | AutoCAD · Revit | +7 سنوات خبرة في التصميم التنفيذي للمشاريع المعمارية
+        </div>
+      </div>
+      <div class="before-after" style="margin-top:6px">
+        <div class="box after">
+          <span class="lab">بديل أكثر إيجازاً (إن رغبتِ بعنوان أقصر)</span>
+          Facade &amp; Technical Design Engineer | Curtain Wall · Aluminum Systems | AutoCAD &amp; Revit Shop Drawings
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="section-head"><span class="num">02</span><h2>قسم "نبذة عني" (About)</h2></div>
+    <div class="card">
+      <div class="flow">
+        <span class="chip current">نقطة قوة</span>
+        <span class="chip issue">نقص</span>
+        <span class="chip fix">إضافة</span>
+      </div>
+      <p>
+        النص الحالي مكتوب بأسلوب راقٍ ومتماسك لغوياً، ويوضح التخصص (واجهات، ألمنيوم،
+        AutoCAD) والطموح لمناصب قيادية — وهذه نقطة قوة حقيقية يجب الحفاظ عليها.
+      </p>
+      <p>
+        النقص الأساسي: النص خالٍ تماماً من أي <b>رقم أو مقياس نتيجة</b> (كم مشروعاً
+        نُفِّذ؟ كم متر مربع من الواجهات؟ كم فريقاً أُشرف عليه؟)، وهو ما يجعله وصفاً
+        عاماً وليس دليلاً على الأداء. كما لا يحتوي على كلمات مفتاحية قابلة للبحث
+        بشكل متكرر (Revit، Curtain Wall، Shop Drawings، BOQ) ولا على دعوة صريحة
+        للتواصل (Call to Action) في السطر الأخير.
+      </p>
+      <div class="before-after">
+        <div class="box before">
+          <span class="lab">مقتطف من النص الحالي</span>
+          "بلغن سنوات عديدة من الخبرة في تصميم وتفصيل أنظمة غلاف المبنى، تعاونتُ
+          بشكل وثيق مع المهندسين المعماريين ومديري المشاريع..."
+        </div>
+        <div class="box after">
+          <span class="lab">إضافة مقترحة بعد الفقرة الثانية</span>
+          "على مدار +7 سنوات، أشرفتُ على التفاصيل التنفيذية لأكثر من [عدد] مشروعاً
+          سكنياً وتجارياً باستخدام AutoCAD وRevit، شملت أنظمة الكِرتن وول والألمنيوم
+          والفينسترشن، مع تسليم رسومات Shop Drawings دقيقة ساهمت في تقليل زمن
+          المراجعة الفنية وتفادي إعادة العمل في التنفيذ."
+        </div>
+      </div>
+      <div class="before-after" style="margin-top:6px">
+        <div class="box after">
+          <span class="lab">جملة ختامية مقترحة (Call to Action)</span>
+          "إذا كنتِ/كنتَ تبحث عن مهندسة تصميم فني تجمع بين الدقة التقنية والالتزام
+          بالمواعيد لمشروع واجهات قادم — راسلني مباشرة، يسعدني مناقشة التفاصيل."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="block" id="experience">
+    <div class="section-head"><span class="num">03</span><h2>قسم الخبرات (Experience)</h2></div>
+
+    <div class="card">
+      <div class="flow"><span class="chip issue">مشكلة عاجلة — دقة البيانات</span></div>
+      <h3>تعارض وتداخل في التواريخ</h3>
+      <p>
+        الملف يُظهر ثلاثة مسارات متداخلة زمنياً:
+      </p>
+      <p style="margin-inline-start:6px">
+        • Technical Engineer @ Trü Architectural — نوفمبر 2024 حتى مايو 2026 (دوام كامل)<br>
+        • Facade Designer @ Trü Architectural — نفس الفترة بالضبط<br>
+        • Senior Technical Engineer @ OMSI Group — حتى أبريل 2025<br>
+        • Technical Office Engineer @ OMSI Group — حتى يناير 2025
+      </p>
+      <p>
+        منصبان بدوام كامل في نفس التاريخ داخل نفس الشركة (Trü)، بالإضافة إلى تداخل
+        مع وظيفة أخرى في شركة مختلفة (OMSI) لمدة تقارب عاماً كاملاً، يعطي انطباعاً
+        بعدم الدقة أو خطأ في إدخال البيانات. أصحاب العمل ومكاتب التوظيف يراجعون
+        الجدول الزمني للخبرات كأول فحص مصداقية.
+      </p>
+      <div class="before-after">
+        <div class="box before">
+          <span class="lab">التصحيح المطلوب</span>
+          1) دمج "Technical Engineer" و"Facade Designer" في مسمى وظيفي واحد إن كانا
+          نفس الدور، أو توضيح الفرق بينهما بوضوح إن كانا منصبين متتاليين فعلاً.<br>
+          2) تعديل تاريخ نهاية كل خبرة سابقة بحيث لا تتقاطع مع الخبرة الحالية.<br>
+          3) التأكد أن جميع التواريخ لا تتجاوز التاريخ الحقيقي الحالي.
+        </div>
+        <div class="box after">
+          <span class="lab">نتيجة الإصلاح</span>
+          خط زمني واحد واضح ومتسلسل يعكس مساراً مهنياً منطقياً: OMSI Group (2017–2025)
+          ← Trü Architectural (2024/2025 – حتى الآن)، دون تداخل تواريخ.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flow"><span class="chip issue">نقص</span><span class="chip fix">توصية</span></div>
+      <h3>وصف الأدوار مقتضب جداً</h3>
+      <p>
+        منصب "Facade Designer" و"Senior Engineer" وغيرها تظهر بدون أي وصف مهام أو
+        إنجازات مكتوبة تحت العنوان — فقط الاسم والتاريخ. هذا يفقد فرصة حقيقية لإظهار
+        نوعية المشاريع والمهارات المستخدمة في كل دور تحديداً.
+      </p>
+      <p>
+        <b>التوصية:</b> أضيفي 2–3 جمل أسفل كل منصب بصيغة "فعل + نتيجة"، مثل:
+        "أعددتُ رسومات Shop Drawings لأنظمة الواجهات الزجاجية لمشروع [اسم المشروع]،
+        بالتنسيق مع فرق التصنيع لضمان مطابقة المواصفات الإنشائية."
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="block" id="skills">
+    <div class="section-head"><span class="num">04</span><h2>قسم المهارات (Skills)</h2></div>
+    <div class="card">
+      <div class="flow"><span class="chip issue">تشتت</span><span class="chip fix">إعادة تنظيم</span></div>
+      <p>
+        القائمة الحالية تضم أكثر من 25 مهارة متفرقة بين تقنية (AutoCAD، Revit،
+        Aluminum، Curtain Wall، Fenestration) وبرمجيات تصميم جرافيكي (Adobe Illustrator،
+        Adobe Photoshop، Logo Design، Canva، Graphic Design) ومهارات شخصية عامة
+        متكررة المعنى (Teamwork، Team Management، Team Motivation، Team Organization،
+        Project Coordination، Project Commissioning). هذا التشتت يُضعف "الهوية
+        المهنية" الظاهرة لصاحب العمل، ويوحي بأن الملف غير متخصص.
+      </p>
+      <p>
+        كذلك، أغلب المهارات لا تحمل أي توصية (Endorsement) حقيقية من زملاء حاليين —
+        أغلبها بصورة حساب افتراضية رمادية بدون اسم، ما يقلل من مصداقيتها كمقياس ثقة.
+      </p>
+      <div class="before-after">
+        <div class="box before">
+          <span class="lab">إبقاء (مهارات جوهرية للتخصص)</span>
+          Facade Design · Curtain Wall · Fenestration · Aluminum · AutoCAD · Revit ·
+          Architectural Drawings · Working Drawings · Shop Drawings · Project Planning
+        </div>
+        <div class="box after">
+          <span class="lab">حذف أو نقل لقسم ثانوي</span>
+          Adobe Illustrator · Adobe Photoshop · Logo Design · Canva · Graphic Design
+          (لا علاقة مباشرة بمسار الهندسة الفنية، وتُربك خوارزمية البحث عن تخصصك)
+        </div>
+      </div>
+      <div class="before-after" style="margin-top:6px">
+        <div class="box after">
+          <span class="lab">دمج المهارات الشخصية المكررة في 2 فقط</span>
+          بدلاً من 5 مهارات متشابهة (Teamwork, Team Management, Team Motivation,
+          Team Organization, Project Coordination) — أبقي على: "Team Leadership"
+          و"Project Coordination" فقط، واطلبي توصية مكتوبة (Recommendation) من
+          مديرك السابق تُثبتهما بدل تكرار الكلمات.
+        </div>
+      </div>
+      <p style="margin-top:14px">
+        <b>الأهم:</b> أعيدي تثبيت (Pin) المهارات الخمس الأولى الظاهرة أعلى الملف
+        لتكون: <span class="mono">Facade Design · Curtain Wall · AutoCAD · Revit · Architectural Drawings</span>
+        بدلاً من التركيبة الحالية التي تضم "Team Motivation".
+      </p>
+    </div>
+  </section>
+
+  <!-- CERTS -->
+  <section class="block" id="certs">
+    <div class="section-head"><span class="num">05</span><h2>الشهادات والتراخيص (Certifications)</h2></div>
+    <div class="card">
+      <div class="flow"><span class="chip issue">ضعف</span><span class="chip fix">استبدال</span></div>
+      <p>
+        الشهادتان الظاهرتان حالياً هما: شهادة EF SET للغة الإنجليزية بنتيجة 52/100
+        (مستوى B2)، ودورة تصميم جرافيك بواسطة Canva. كلتاهما بعيدتان عن صميم تخصص
+        الهندسة الفنية والواجهات، وعرض نتيجة رقمية متوسطة (52/100) للغة بشكل علني
+        قد يُقرأ سلباً من قِبل مُجنِّد يبحث عن كفاءة تواصل عالية لأدوار دولية.
+      </p>
+      <p>
+        <b>التوصية:</b> إبقاء شهادة اللغة مقبول إن رُفعت لاحقاً بنتيجة أعلى، لكن
+        الأولوية القصوى هي إضافة شهادات تقنية مباشرة تعزز الثقة في التخصص، مثل:
+        شهادة Autodesk Certified Professional في AutoCAD أو Revit، أو دورة معتمدة
+        في أنظمة الواجهات (Facade Engineering / Curtain Wall Design)، أو شهادة
+        Project Management أساسية إن كان الهدف التوجه لأدوار إشرافية.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTENT STRATEGY -->
+  <section class="block" id="content">
+    <div class="section-head"><span class="num">06</span><h2>استراتيجية المحتوى — خطة 30 يوماً</h2></div>
+    <div class="card">
+      <p>
+        لا يظهر أي نشاط نشر على الملف حالياً. الخوارزمية في LinkedIn تُعطي وزناً
+        أكبر للحسابات النشطة أسبوعياً في نتائج البحث والتوصيات، لذلك فإن الانتظام
+        لمدة شهر واحد كافٍ لبدء ظهور ملحوظ. الجدول التالي يقترح منشوراً واحداً
+        أسبوعياً (يمكن زيادته إلى منشورين إن سمح الوقت):
+      </p>
+    </div>
+    <table>
+      <thead>
+        <tr><th>الأسبوع</th><th>نوع المحتوى</th><th>الفكرة المقترحة</th><th>التوقيت</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="week-tag">الأسبوع 1</td>
+          <td>محتوى توعوي</td>
+          <td>منشور قصير يشرح الفرق بين أنظمة Curtain Wall وUnitized Facade، مع
+          رسم توضيحي بسيط من إعدادك (AutoCAD/Revit).</td>
+          <td>الثلاثاء 10 صباحاً</td>
+        </tr>
+        <tr>
+          <td class="week-tag">الأسبوع 2</td>
+          <td>دراسة حالة</td>
+          <td>عرض مشروع "Mazarine – New Alamein": التحدي التقني، الحل، صورة
+          Before/After لرسم الواجهة إن كانت متاحة (بدون كسر بنود السرية مع صاحب العمل).</td>
+          <td>الأربعاء 11 صباحاً</td>
+        </tr>
+        <tr>
+          <td class="week-tag">الأسبوع 3</td>
+          <td>اتجاهات الصناعة</td>
+          <td>منشور عن اتجاهات أنظمة الألمنيوم المستدامة وكفاءة الطاقة في الواجهات
+          لعام 2026، مع رأي شخصي قصير.</td>
+          <td>الثلاثاء 9 صباحاً</td>
+        </tr>
+        <tr>
+          <td class="week-tag">الأسبوع 4</td>
+          <td>محتوى شخصي/تفاعلي</td>
+          <td>منشور عن أهم درس تعلمتِه في الانتقال من AutoCAD إلى Revit، ينتهي
+          بسؤال مباشر للجمهور لتحفيز التعليقات.</td>
+          <td>الخميس 10 صباحاً</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card" style="margin-top:16px">
+      <h3>طرق زيادة التفاعل وبناء الجمهور المستهدف</h3>
+      <p style="margin-inline-start:4px">
+        • فعّلي قسم <b>Featured</b> وأضيفي إليه صور/PDF لعينة من رسومات Shop
+        Drawings أو رندر لمشروع Mazarine (توضيح مهارتك بصرياً وليس نصياً فقط).<br>
+        • علّقي بشكل يومي (تعليق حقيقي لا "رائع!") على منشورات 3–5 شركات أو
+        مهندسين في مجال الواجهات والمقاولات — هذا يوسّع ظهورك لجمهورهم مجاناً.<br>
+        • استخدمي 3 إلى 5 هاشتاجات دقيقة لكل منشور مثل
+        <span class="mono">#FacadeEngineering #CurtainWall #Revit</span> بدل هاشتاجات عامة.<br>
+        • ردّي على أي تعليق خلال الساعة الأولى من النشر، فهذا يرفع ترتيب المنشور
+        في الخوارزمية بشكل مباشر.<br>
+        • انضمي إلى مجموعتين مهنيتين (Facade/Curtain Wall Engineers) وشاركي فيهما
+        قبل النشر على ملفك الشخصي لبناء شبكة أولية من المهتمين بنفس التخصص.
+      </p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="block" id="steps">
+    <div class="section-head"><span class="num">07</span><h2>خطوات التنفيذ المرقّمة</h2></div>
+    <div class="card">
+      <ul class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <div><h4>صحّحي جميع تواريخ الخبرات المتضاربة</h4>
+          <p>ابدئي بهذه الخطوة قبل أي شيء آخر — هي الأكثر تأثيراً على المصداقية.</p></div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div><h4>اكتبي العنوان التعريفي الجديد</h4>
+          <p>استخدمي أحد النموذجين المقترحين أعلاه، وضعيه فوراً.</p></div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div><h4>أضيفي فقرة الأرقام والإنجازات إلى "نبذة عني"</h4>
+          <p>حتى لو كانت الأرقام تقديرية بحذر، فهي أقوى بكثير من وصف عام بلا قياس.</p></div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div><h4>أعيدي تثبيت المهارات الخمس الأولى</h4>
+          <p>احذفي "Team Motivation" من الصدارة، وثبّتي Facade Design وCurtain Wall.</p></div>
+        </li>
+        <li>
+          <span class="step-num">5</span>
+          <div><h4>احذفي أو أرشفي مهارات التصميم الجرافيكي غير المرتبطة بالتخصص</h4>
+          <p>Adobe Illustrator وCanva وLogo Design تشوّش هوية الملف المهنية.</p></div>
+        </li>
+        <li>
+          <span class="step-num">6</span>
+          <div><h4>فعّلي قسم Featured وارفعي عينة أعمال بصرية</h4>
+          <p>رسم Shop Drawing واحد أو صورة رندر واجهة كافية للبداية.</p></div>
+        </li>
+        <li>
+          <span class="step-num">7</span>
+          <div><h4>انشري أول منشور من جدول المحتوى خلال هذا الأسبوع</h4>
+          <p>ابدئي بمنشور الأسبوع الأول (المحتوى التوعوي) لأنه الأسهل تنفيذاً.</p></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <p style="margin:0">
+        <b>ملاحظة أخيرة:</b> جميع التوصيات أعلاه مبنية على المحتوى الفعلي الظاهر في
+        لقطات الشاشة المرفقة فقط. أي أرقام أو إحصائيات مشاريع مذكورة في الأمثلة
+        (مثل عدد المشاريع أو المساحات) هي أمثلة صياغة يجب استبدالها بأرقامك
+        الحقيقية قبل النشر، لضمان دقة المعلومات المعروضة على الملف العام.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  تقرير تدقيق مبني على تحليل بصري للقطات الشاشة المرفقة — راجعي كل نقطة قبل التطبيق للتأكد من مطابقتها لواقع مسيرتك المهنية.
+  <br>
+  <a href="#" class="backtop" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">العودة إلى الأعلى ↑</a>
+</footer>
+
+</body>
+</html>
